@@ -25,10 +25,10 @@ def on_message(client, userdata, msg):
     else:
         pass
  
-client = mqtt.Client()
-client.username_pw_set( "User" , "Password" )
-client.connect( "m23.cloudmqtt.com", 17905, 60)
-client.subscribe( "frame/red/display" , qos=0)
+client = mqtt.Client() #Service from CloudMQTT
+client.username_pw_set( "User" , "Password" ) # Change "User" and "Password" 
+client.connect( "soldier.cloudmqtt.com"", 15440, 60) 
+client.subscribe( "alexa/prueba" , qos=0)
 client.on_connect = on_connect
 client.on_message = on_message
 client.loop_forever()
