@@ -2,6 +2,12 @@
  
 import paho.mqtt.client as mqtt
 import subprocess
+
+from omxplayer.player import OMXPlayer
+from pathlib import Path
+from time import sleep 
+
+VIDEO_PATH = Path("home/pi/Desktop/Videos/test_media_1.mp4")
  
 def hdmi_on():
     CONTROL = "vcgencmd"
@@ -12,6 +18,9 @@ def hdmi_off():
     CONTROL = "vcgencmd"
     CONTROL_BLANK = [CONTROL, "display_power", "0"]
     subprocess.call(CONTROL_BLANK)
+    
+def play_video(video):
+    subprocess.call("omxplayer" video)
  
 def on_connect(client, userdata, flags, rc):
   print("Connected to MQTT broker")
@@ -20,6 +29,8 @@ def on_message(client, userdata, msg):
     print(msg.topic+" "+str(msg.qos)+" "+str(msg.payload))
     if msg.payload.decode() == "on":
         hdmi_on()
+        player = OMXPlayer(VIDEO_PATH)
+        sleep(5)
     elif msg.payload.decode() == "off":
         hdmi_off()
     else:
