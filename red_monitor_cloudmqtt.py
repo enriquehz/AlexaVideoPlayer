@@ -7,7 +7,7 @@ from omxplayer.player import OMXPlayer
 from pathlib import Path
 from time import sleep 
 
-VIDEO_PATH = Path("home/pi/Desktop/Videos/test_media_1.mp4")
+VIDEO_PATH = Path("home/pi/Desktop/Videos/vistasur.mkv")
  
 def hdmi_on():
     CONTROL = "vcgencmd"
